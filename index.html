@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salida Equipo TI — Lastra</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="logo-wrap">
+      <img src="/assest/lastra-fond.png" alt="Lastra" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-size:13px;font-weight:700;color:#C8102E\'>L</span>'">
+    </div>
+    <div class="brand-text">
+      <h1>Lastra</h1>
+      <p>Gestión de equipos TI</p>
+    </div>
+  </div>
+  <div class="header-pill">
+    <div class="dot"></div>
+    <span>Salida de Equipo</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- 1. FECHA -->
+  <div class="step-label">
+    <div class="step-num">1</div>
+    <h2>Fecha de salida</h2>
+  </div>
+  <div class="card">
+    <div class="fecha-row">
+      <div class="fecha-cell">
+        <span class="f-label">Día</span>
+        <input class="f-input" id="dia" type="number" min="1" max="31" placeholder="01">
+      </div>
+      <div class="fecha-cell">
+        <span class="f-label">Mes</span>
+        <input class="f-input" id="mes" type="number" min="1" max="12" placeholder="06">
+      </div>
+      <div class="fecha-cell">
+        <span class="f-label">Año</span>
+        <input class="f-input" id="anio" type="number" placeholder="2026">
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. EQUIPO -->
+  <div class="step-label">
+    <div class="step-num">2</div>
+    <h2>Información del equipo</h2>
+  </div>
+  <div class="card">
+    <div class="eq-head">
+      <div class="eq-th">Descripción</div>
+      <div class="eq-th">Marca</div>
+      <div class="eq-th">Modelo</div>
+      <div class="eq-th">Serial</div>
+      <div class="eq-th">Responsable</div>
+      <div class="eq-th">Área</div>
+    </div>
+    <div class="eq-body">
+      <div class="eq-cell"><input class="eq-in" id="edesc" type="text" placeholder="Portátil"></div>
+      <div class="eq-cell"><input class="eq-in" id="emarca" type="text" placeholder="DELL"></div>
+      <div class="eq-cell"><input class="eq-in" id="emodelo" type="text" placeholder="Latitude 3490"></div>
+      <div class="eq-cell"><input class="eq-in mono" id="eserial" type="text" placeholder="H2KB1W2"></div>
+      <div class="eq-cell"><input class="eq-in" id="eresp" type="text" placeholder="Lina Rojas"></div>
+      <div class="eq-cell"><input class="eq-in" id="earea" type="text" placeholder="Tesorería"></div>
+    </div>
+  </div>
+
+  <!-- 3. OBS -->
+  <div class="step-label">
+    <div class="step-num">3</div>
+    <h2>Observaciones</h2>
+  </div>
+  <div class="card">
+    <div class="obs-body">
+      <textarea class="obs-ta" id="obs" rows="3" placeholder="El equipo sale de la compañía en perfecto estado. Adicional se presta Mouse Logitech RL2..."></textarea>
+    </div>
+  </div>
+
+  <!-- 4. FIRMAS -->
+  <div class="step-label">
+    <div class="step-num">4</div>
+    <h2>Firmas digitales</h2>
+  </div>
+  <div class="card">
+    <div class="sig-intro">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A09E99" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <span>Firme directamente en el recuadro usando el mouse o touchpad — trace su firma con fluidez</span>
+    </div>
+    <div class="sig-grid">
+
+      <div class="sig-col">
+        <div class="sig-role">Entregado por</div>
+        <input class="name-in" id="n1" type="text" placeholder="Nombre completo">
+        <div class="canvas-wrap" id="wrap1">
+          <canvas class="sig-canvas" id="c1" width="700" height="240"></canvas>
+          <div class="canvas-hint">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A09E99" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Firmar aquí</span>
+          </div>
+        </div>
+        <div class="sig-foot"><button class="btn-clr" onclick="clr(1)">✕ Borrar</button></div>
+      </div>
+
+      <div class="sig-col">
+        <div class="sig-role">Recibido por</div>
+        <input class="name-in" id="n2" type="text" placeholder="Nombre completo">
+        <div class="canvas-wrap" id="wrap2">
+          <canvas class="sig-canvas" id="c2" width="700" height="240"></canvas>
+          <div class="canvas-hint">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A09E99" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Firmar aquí</span>
+          </div>
+        </div>
+        <div class="sig-foot"><button class="btn-clr" onclick="clr(2)">✕ Borrar</button></div>
+      </div>
+
+      <div class="sig-col">
+        <div class="sig-role">Autorizado por</div>
+        <input class="name-in" id="n3" type="text" placeholder="Nombre completo">
+        <div class="canvas-wrap" id="wrap3">
+          <canvas class="sig-canvas" id="c3" width="700" height="240"></canvas>
+          <div class="canvas-hint">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A09E99" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span>Firmar aquí</span>
+          </div>
+        </div>
+        <div class="sig-foot"><button class="btn-clr" onclick="clr(3)">✕ Borrar</button></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottombar">
+  <button class="btn-reset" onclick="resetAll()">
+    <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+    Limpiar todo
+  </button>
+  <div class="spacer"></div>
+  <span class="errmsg" id="errmsg">Completa descripción y las firmas de entrega y recibido.</span>
+  <button class="btn-send" id="btnSend" onclick="guardarPDF()">
+    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Guardar PDF
+  </button>
+</div>
+
+<div class="toast" id="toast">
+  <svg id="tIcon" viewBox="0 0 24 24"></svg>
+  <span id="tMsg"></span>
+</div>
+
+<script>
+const signed = { 1: false, 2: false, 3: false };
+
+function initCanvas(n) {
+  const cv = document.getElementById('c' + n);
+  const wrap = document.getElementById('wrap' + n);
+  const ctx = cv.getContext('2d');
+  ctx.strokeStyle = '#1A1917';
+  ctx.lineWidth = 2.2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  let down = false, lx = 0, ly = 0;
+
+  function xy(e) {
+    const r = cv.getBoundingClientRect();
+    const sx = cv.width / r.width, sy = cv.height / r.height;
+    const s = e.touches ? e.touches[0] : e;
+    return { x: (s.clientX - r.left) * sx, y: (s.clientY - r.top) * sy };
+  }
+  function start(e) {
+    e.preventDefault(); down = true;
+    wrap.classList.add('active');
+    const p = xy(e); lx = p.x; ly = p.y;
+    ctx.beginPath(); ctx.moveTo(p.x, p.y);
+  }
+  function move(e) {
+    e.preventDefault(); if (!down) return;
+    const p = xy(e);
+    ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(p.x, p.y); ctx.stroke();
+    lx = p.x; ly = p.y;
+  }
+  function stop() {
+    if (!down) return; down = false;
+    wrap.classList.remove('active');
+    wrap.classList.add('signed');
+    signed[n] = true;
+  }
+  cv.addEventListener('mousedown', start);
+  cv.addEventListener('mousemove', move);
+  cv.addEventListener('mouseup', stop);
+  cv.addEventListener('mouseleave', stop);
+  cv.addEventListener('touchstart', start, { passive: false });
+  cv.addEventListener('touchmove', move, { passive: false });
+  cv.addEventListener('touchend', stop);
+}
+
+function clr(n) {
+  const cv = document.getElementById('c' + n);
+  const wrap = document.getElementById('wrap' + n);
+  cv.getContext('2d').clearRect(0, 0, cv.width, cv.height);
+  wrap.classList.remove('signed', 'active');
+  signed[n] = false;
+}
+
+function resetAll() {
+  ['dia','mes','anio','edesc','emarca','emodelo','eserial','eresp','earea','obs','n1','n2','n3']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  [1,2,3].forEach(clr);
+  setToday();
+  document.getElementById('errmsg').style.display = 'none';
+}
+
+function setToday() {
+  const d = new Date();
+  document.getElementById('dia').value = d.getDate();
+  document.getElementById('mes').value = d.getMonth() + 1;
+  document.getElementById('anio').value = d.getFullYear();
+}
+
+function toast(msg, ok) {
+  const t = document.getElementById('toast');
+  const ic = document.getElementById('tIcon');
+  document.getElementById('tMsg').textContent = msg;
+  t.className = 'toast ' + (ok ? 'ok' : 'err');
+  ic.innerHTML = ok
+    ? '<polyline points="20 6 9 17 4 12"/>'
+    : '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3800);
+}
+
+function v(id) { return (document.getElementById(id) || {}).value || ''; }
+
+function buildPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const W = 210, mg = 15;
+  let y = mg;
+
+  // Header bar
+  doc.setFillColor(200, 16, 46);
+  doc.roundedRect(mg, y, W - mg*2, 20, 3, 3, 'F');
+
+  // Try to add logo
+  try {
+    const logoEl = document.querySelector('.logo-wrap img');
+    if (logoEl && logoEl.complete && logoEl.naturalWidth > 0) {
+      const tmpC = document.createElement('canvas');
+      tmpC.width = 80; tmpC.height = 80;
+      const tc = tmpC.getContext('2d');
+      tc.drawImage(logoEl, 0, 0, 80, 80);
+      doc.addImage(tmpC.toDataURL('image/png'), 'PNG', mg + 2, y + 2, 16, 16);
+    }
+  } catch(e) {}
+
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(15);
+  doc.text('SALIDA EQUIPO TI', W/2, y+13, { align:'center' });
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(9);
+  const fStr = `${v('dia')}/${v('mes')}/${v('anio')}`;
+  doc.text(fStr, W - mg - 4, y + 13, { align:'right' });
+  y += 26;
+
+  // Section helper
+  function section(title) {
+    doc.setFillColor(245,243,240);
+    doc.rect(mg, y, W-mg*2, 8, 'F');
+    doc.setDrawColor(226,224,218);
+    doc.rect(mg, y, W-mg*2, 8);
+    doc.setTextColor(92,90,86);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
+    doc.text(title, mg+5, y+5.5);
+    y += 8;
+  }
+
+  // Equipment
+  section('DESCRIPCIÓN DEL EQUIPO');
+  const cols = [
+    {lbl:'DESCRIPCIÓN', val:v('edesc'), w:30},
+    {lbl:'MARCA', val:v('emarca'), w:25},
+    {lbl:'MODELO', val:v('emodelo'), w:38},
+    {lbl:'SERIAL', val:v('eserial'), w:28},
+    {lbl:'RESPONSABLE', val:v('eresp'), w:33},
+    {lbl:'ÁREA', val:v('earea'), w:26},
+  ];
+  doc.setFillColor(250,249,247);
+  doc.rect(mg, y, W-mg*2, 7, 'F');
+  doc.setDrawColor(226,224,218);
+  doc.rect(mg, y, W-mg*2, 7);
+  doc.setTextColor(160,158,153); doc.setFont('helvetica','bold'); doc.setFontSize(7.5);
+  let cx = mg;
+  cols.forEach(c => { doc.text(c.lbl, cx+c.w/2, y+4.8, {align:'center'}); cx+=c.w; });
+  y += 7;
+  doc.setFillColor(255,255,255);
+  doc.rect(mg, y, W-mg*2, 11, 'F');
+  doc.rect(mg, y, W-mg*2, 11);
+  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  cx = mg;
+  cols.forEach(c => {
+    const t = c.val.length > 13 ? c.val.slice(0,12)+'…' : c.val;
+    doc.text(t, cx+c.w/2, y+7, {align:'center'});
+    cx += c.w;
+  });
+  y += 16;
+
+  // Obs
+  section('OBSERVACIONES');
+  const obsH = 26;
+  doc.setFillColor(255,255,255);
+  doc.rect(mg, y, W-mg*2, obsH, 'F');
+  doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, obsH);
+  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+  const lines = doc.splitTextToSize(v('obs'), W-mg*2-10);
+  doc.text(lines.slice(0,5), mg+5, y+8);
+  y += obsH + 8;
+
+  // Firmas
+  section('FIRMAS');
+  const sw = (W-mg*2)/3, sh = 44;
+  const roles = ['ENTREGADO POR','RECIBIDO POR','AUTORIZADO POR'];
+  const names = [v('n1'),v('n2'),v('n3')];
+  roles.forEach((role, i) => {
+    const sx = mg + i*sw;
+    doc.setFillColor(255,255,255);
+    doc.rect(sx, y, sw, sh, 'F');
+    doc.setDrawColor(226,224,218); doc.rect(sx, y, sw, sh);
+    doc.setFillColor(245,243,240);
+    doc.rect(sx, y, sw, 8, 'F');
+    doc.setTextColor(200,16,46); doc.setFont('helvetica','bold'); doc.setFontSize(7);
+    doc.text(role, sx+sw/2, y+5.5, {align:'center'});
+    if (signed[i+1]) {
+      try {
+        doc.addImage(document.getElementById('c'+(i+1)).toDataURL('image/png'), 'PNG', sx+3, y+9, sw-6, 26);
+      } catch(e){}
+    }
+    // Name line
+    doc.setDrawColor(200,16,46); doc.setLineWidth(.35);
+    doc.line(sx+5, y+sh-7, sx+sw-5, y+sh-7);
+    doc.setLineWidth(.2); doc.setDrawColor(226,224,218);
+    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    doc.text(names[i], sx+sw/2, y+sh-3, {align:'center'});
+  });
+  y += sh + 8;
+
+  // Footer
+  doc.setTextColor(160,158,153); doc.setFontSize(7.5); doc.setFont('helvetica','normal');
+  doc.text('Lastra — Documento generado digitalmente', mg, 292);
+  doc.text(fStr, W-mg, 292, {align:'right'});
+
+  return doc;
+}
+
+function guardarPDF() {
+  const desc = v('edesc').trim();
+  const errmsg = document.getElementById('errmsg');
+  if (!desc || !signed[1] || !signed[2]) {
+    errmsg.style.display = 'block';
+    setTimeout(() => errmsg.style.display = 'none', 4000);
+    return;
+  }
+  errmsg.style.display = 'none';
+  const btn = document.getElementById('btnSend');
+  btn.classList.add('loading');
+  btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Guardando...`;
+  setTimeout(() => {
+    try {
+      const doc = buildPDF();
+      const dia = v('dia'), mes = v('mes'), anio = v('anio');
+      doc.save(`Salida_TI_${desc}_${dia}-${mes}-${anio}.pdf`);
+      toast('PDF guardado correctamente', true);
+    } catch(e) {
+      toast('Error al generar el PDF', false);
+    }
+    btn.classList.remove('loading');
+    btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;flex-shrink:0"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Guardar PDF`;
+  }, 200);
+}
+
+[1,2,3].forEach(initCanvas);
+setToday();
+</script>
+</body>
+</html>
