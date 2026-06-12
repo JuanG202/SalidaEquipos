@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salida Equipo TI — Lastra</title>
+<title>Entrega de Accesorios TI — Lastra</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 <body>
 
@@ -19,19 +20,17 @@
       <h1>Lastra</h1>
       <p>Gestión de equipos TI</p>
     </div>
-
     <a class="mes-btn" href="./mantenimiento_preventivo.html">
       Mantenimientos 
     </a>
 
-    <a class="mes-btn" href="./entregas.html">
-      Entregas 
+    <a class="mes-btn" href="./index.html">
+      Salida Equipo 
     </a>
-    
   </div>
   <div class="header-pill">
     <div class="dot"></div>
-    <span>Salida de Equipo</span>
+    <span>Entrega de Accesorios</span>
   </div>
 </div>
 
@@ -39,7 +38,7 @@
 
   <div class="step-label">
     <div class="step-num">1</div>
-    <h2>Fecha de salida</h2>
+    <h2>Fecha de entrega</h2>
   </div>
   <div class="card">
     <div class="fecha-row">
@@ -60,39 +59,61 @@
 
   <div class="step-label">
     <div class="step-num">2</div>
-    <h2>Información del equipo</h2>
+    <h2>Destinatario</h2>
   </div>
   <div class="card">
-    <div class="eq-head">
-      <div class="eq-th">Descripción</div>
-      <div class="eq-th">Marca</div>
-      <div class="eq-th">Modelo</div>
-      <div class="eq-th">Serial</div>
-      <div class="eq-th">Responsable</div>
-      <div class="eq-th">Área</div>
-    </div>
-    <div class="eq-body">
-      <div class="eq-cell"><input class="eq-in" id="edesc" type="text" placeholder="Portátil"></div>
-      <div class="eq-cell"><input class="eq-in" id="emarca" type="text" placeholder="DELL"></div>
-      <div class="eq-cell"><input class="eq-in" id="emodelo" type="text" placeholder="Latitude 3490"></div>
-      <div class="eq-cell"><input class="eq-in mono" id="eserial" type="text" placeholder="H2KB1W2"></div>
-      <div class="eq-cell"><input class="eq-in" id="eresp" type="text" placeholder="usuario"></div>
-      <div class="eq-cell"><input class="eq-in" id="earea" type="text" placeholder="departamento"></div>
+    <div class="dest-grid">
+      <div class="dest-cell">
+        <span class="dest-label">Nombre</span>
+        <input class="dest-in" id="nombre" type="text" placeholder="Nombre completo del usuario">
+      </div>
+      <div class="dest-cell">
+        <span class="dest-label">Departamento / Área</span>
+        <input class="dest-in" id="area" type="text" placeholder="Nombre del área">
+      </div>
+      <div class="dest-cell full">
+        <span class="dest-label">Sede</span>
+        <input class="dest-in" id="sede" type="text" placeholder="Cali, Neiva, Pasto...">
+      </div>
     </div>
   </div>
 
   <div class="step-label">
     <div class="step-num">3</div>
-    <h2>Observaciones</h2>
+    <h2>Artículos entregados</h2>
   </div>
   <div class="card">
-    <div class="obs-body">
-      <textarea class="obs-ta" id="obs" rows="3" placeholder="El equipo sale de la compañía en perfecto estado. Adicional se presta Mouse Logitech RL2..."></textarea>
+    <div class="items-header">
+      <span class="items-header-label">Lista de artículos</span>
+      <button class="btn-add-item" onclick="addItem()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Agregar artículo
+      </button>
+    </div>
+    <div class="items-table-head">
+      <div class="items-th">Descripción</div>
+      <div class="items-th">Modelo / Referencia</div>
+      <div class="items-th">Serial</div>
+      <div class="items-th">Estado</div>
+      <div class="items-th"></div>
+    </div>
+    <div class="items-list" id="itemsList">
+      <div class="empty-items" id="emptyItems">Agrega al menos un artículo</div>
     </div>
   </div>
 
   <div class="step-label">
     <div class="step-num">4</div>
+    <h2>Observaciones</h2>
+  </div>
+  <div class="card">
+    <div class="obs-body">
+      <textarea class="obs-ta" id="obs" rows="3" placeholder="Condiciones del artículo, accesorios incluidos, novedades adicionales..."></textarea>
+    </div>
+  </div>
+
+  <div class="step-label">
+    <div class="step-num">5</div>
     <h2>Firmas digitales</h2>
   </div>
   <div class="card">
@@ -136,23 +157,6 @@
         <div class="sig-foot"><button class="btn-clr" onclick="clr(2)">✕ Borrar</button></div>
       </div>
 
-      <div class="sig-col">
-        <div class="sig-role">Autorizado por</div>
-        <input class="name-in" id="n3" type="text" placeholder="Nombre completo">
-        <div class="sig-preview" id="prev3" onclick="openModal(3)">
-          <img id="img3" src="" alt="Firma">
-          <div class="btn-open-sig">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            <span style="font-size:12px;color:var(--red);font-weight:600;letter-spacing:.1px">Firmar aquí</span>
-          </div>
-          <div class="edit-overlay">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            Editar firma
-          </div>
-        </div>
-        <div class="sig-foot"><button class="btn-clr" onclick="clr(3)">✕ Borrar</button></div>
-      </div>
-
     </div>
   </div>
 
@@ -165,7 +169,7 @@
     Limpiar todo
   </button>
   <div class="spacer"></div>
-  <span class="errmsg" id="errmsg">Completa descripción y las firmas de entrega y recibido.</span>
+  <span class="errmsg" id="errmsg">Completa nombre, al menos un artículo y las dos firmas.</span>
   <button class="btn-send" id="btnSend" onclick="guardarPDF()">
     <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Guardar PDF
@@ -174,7 +178,7 @@
 
 <!-- MODAL FIRMA -->
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
-  <div class="modal-box" id="modalBox">
+  <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">
         <span class="role-tag" id="modalRoleTag">Entregado por</span>
@@ -184,7 +188,6 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
-
     <div class="modal-canvas-area">
       <div class="modal-hint">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -192,13 +195,12 @@
       </div>
       <div class="modal-canvas-wrap" id="modalWrap">
         <canvas class="modal-canvas" id="modalCanvas" width="1200" height="440"></canvas>
-        <div class="modal-canvas-placeholder" id="modalPlaceholder">
+        <div class="modal-canvas-placeholder">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#A09E99" stroke-width="1.2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           <span>Firma aquí</span>
         </div>
       </div>
     </div>
-
     <div class="modal-actions">
       <button class="btn-modal-clr" onclick="clearModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
@@ -218,20 +220,104 @@
 </div>
 
 <script>
-const signed = { 1: false, 2: false, 3: false };
-const sigData = { 1: null, 2: null, 3: null };
-const roleNames = { 1: 'Entregado por', 2: 'Recibido por', 3: 'Autorizado por' };
+const signed = { 1: false, 2: false };
+const sigData = { 1: null, 2: null };
+const roleNames = { 1: 'Entregado por', 2: 'Recibido por' };
 let currentSigNum = null;
 let modalHasDrawing = false;
+let itemCounter = 0;
 
-// ── MODAL CANVAS ──
+const ESTADOS = ['Nuevo', 'Bueno', 'Regular', 'Reacondicionado'];
+const DESCRIPCIONES = ['Pad Mouse', 'Mouse', 'Teclado', 'Diadema', 'Audífonos', 'Cargador', 'Cable HDMI', 'Cable USB', 'Webcam', 'Monitor', 'Adaptador', 'Otro'];
+
+function updateEmpty() {
+  const list = document.getElementById('itemsList');
+  const empty = document.getElementById('emptyItems');
+  const rows = list.querySelectorAll('.item-row');
+  empty.style.display = rows.length === 0 ? 'block' : 'none';
+}
+
+function addItem(desc, modelo, serial, estado) {
+  itemCounter++;
+  const id = 'ir_' + itemCounter;
+  const list = document.getElementById('itemsList');
+  const empty = document.getElementById('emptyItems');
+  if (empty) empty.style.display = 'none';
+
+  const div = document.createElement('div');
+  div.className = 'item-row';
+  div.id = id;
+
+  const descOpts = DESCRIPCIONES.map(d => `<option value="${d}" ${desc===d?'selected':''}>${d}</option>`).join('');
+  const estadoOpts = ESTADOS.map(e => `<option value="${e}" ${estado===e?'selected':''}>${e}</option>`).join('');
+
+  div.innerHTML = `
+    <div class="item-cell">
+      <select class="item-in item-select">
+        <option value="" disabled ${!desc?'selected':''}>Seleccionar...</option>
+        ${descOpts}
+        <option value="__custom__">Otro (escribir)</option>
+      </select>
+    </div>
+    <div class="item-cell">
+      <input class="item-in mono" type="text" placeholder="Ej. GEL BSK-304" value="${modelo||''}">
+    </div>
+    <div class="item-cell">
+      <input class="item-in mono" type="text" placeholder="N/A" value="${serial||''}">
+    </div>
+    <div class="item-cell">
+      <select class="item-in item-select">
+        ${estadoOpts}
+      </select>
+    </div>
+    <div class="item-cell center">
+      <button class="btn-del-item" onclick="delItem('${id}')" title="Eliminar">✕</button>
+    </div>
+  `;
+
+  const descSel = div.querySelector('select');
+  descSel.addEventListener('change', function() {
+    if (this.value === '__custom__') {
+      const inp = document.createElement('input');
+      inp.className = 'item-in';
+      inp.type = 'text';
+      inp.placeholder = 'Descripción del artículo';
+      this.parentNode.replaceChild(inp, this);
+      inp.focus();
+    }
+  });
+
+  list.appendChild(div);
+}
+
+function delItem(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  updateEmpty();
+}
+
+function getItems() {
+  const rows = document.querySelectorAll('.item-row');
+  const items = [];
+  rows.forEach(row => {
+    const cells = row.querySelectorAll('.item-cell');
+    const descEl = cells[0].querySelector('select, input');
+    const modeloEl = cells[1].querySelector('input');
+    const serialEl = cells[2].querySelector('input');
+    const estadoEl = cells[3].querySelector('select, input');
+    const desc = descEl ? descEl.value.trim() : '';
+    const modelo = modeloEl ? modeloEl.value.trim() : '';
+    const serial = serialEl ? serialEl.value.trim() : '';
+    const estado = estadoEl ? estadoEl.value.trim() : '';
+    if (desc && desc !== '__custom__') items.push({ desc, modelo, serial, estado });
+  });
+  return items;
+}
+
+// MODAL CANVAS
 const mCanvas = document.getElementById('modalCanvas');
 const mCtx = mCanvas.getContext('2d');
-mCtx.strokeStyle = '#1A1917';
-mCtx.lineWidth = 3;
-mCtx.lineCap = 'round';
-mCtx.lineJoin = 'round';
-
+mCtx.strokeStyle = '#1A1917'; mCtx.lineWidth = 3; mCtx.lineCap = 'round'; mCtx.lineJoin = 'round';
 let mDown = false, mlx = 0, mly = 0;
 
 function mXY(e) {
@@ -259,7 +345,6 @@ function mStop() {
   modalHasDrawing = true;
   document.getElementById('btnConfirm').disabled = false;
 }
-
 mCanvas.addEventListener('mousedown', mStart);
 mCanvas.addEventListener('mousemove', mMove);
 mCanvas.addEventListener('mouseup', mStop);
@@ -271,7 +356,6 @@ mCanvas.addEventListener('touchend', mStop);
 function openModal(n) {
   currentSigNum = n;
   document.getElementById('modalRoleTag').textContent = roleNames[n];
-  // Si ya tiene firma, cargarla en el canvas
   clearModal();
   if (sigData[n]) {
     const img = new Image();
@@ -286,71 +370,59 @@ function openModal(n) {
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
   currentSigNum = null;
 }
-
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
 }
-
 function clearModal() {
   mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
   document.getElementById('modalWrap').classList.remove('active', 'has-drawing');
   modalHasDrawing = false;
   document.getElementById('btnConfirm').disabled = true;
 }
-
 function confirmSig() {
   if (!currentSigNum || !modalHasDrawing) return;
   const dataUrl = mCanvas.toDataURL('image/png');
   sigData[currentSigNum] = dataUrl;
   signed[currentSigNum] = true;
-  // Actualizar preview
-  const img = document.getElementById('img' + currentSigNum);
-  img.src = dataUrl;
+  document.getElementById('img' + currentSigNum).src = dataUrl;
   document.getElementById('prev' + currentSigNum).classList.add('has-sig');
   closeModal();
   toast('Firma guardada', true);
 }
-
 function clr(n) {
-  sigData[n] = null;
-  signed[n] = false;
+  sigData[n] = null; signed[n] = false;
   document.getElementById('img' + n).src = '';
   document.getElementById('prev' + n).classList.remove('has-sig');
 }
-
 function resetAll() {
-  ['dia','mes','anio','edesc','emarca','emodelo','eserial','eresp','earea','obs','n1','n2','n3']
+  ['dia','mes','anio','nombre','area','sede','obs','n1','n2']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  [1,2,3].forEach(clr);
+  [1,2].forEach(clr);
+  document.getElementById('itemsList').innerHTML = '<div class="empty-items" id="emptyItems">Agrega al menos un artículo</div>';
+  itemCounter = 0;
   setToday();
   document.getElementById('errmsg').style.display = 'none';
 }
-
 function setToday() {
   const d = new Date();
   document.getElementById('dia').value = d.getDate();
   document.getElementById('mes').value = d.getMonth() + 1;
   document.getElementById('anio').value = d.getFullYear();
 }
-
 function toast(msg, ok) {
   const t = document.getElementById('toast');
   const ic = document.getElementById('tIcon');
   document.getElementById('tMsg').textContent = msg;
   t.className = 'toast ' + (ok ? 'ok' : 'err');
-  ic.innerHTML = ok
-    ? '<polyline points="20 6 9 17 4 12"/>'
-    : '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>';
+  ic.innerHTML = ok ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>';
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3800);
 }
-
 function v(id) { return (document.getElementById(id) || {}).value || ''; }
 
 function buildPDF() {
@@ -359,118 +431,148 @@ function buildPDF() {
   const W = 210, mg = 15;
   let y = mg;
 
+  // HEADER
   doc.setFillColor(200, 16, 46);
-  doc.roundedRect(mg, y, W - mg*2, 20, 3, 3, 'F');
-
+  doc.roundedRect(mg, y, W - mg*2, 22, 3, 3, 'F');
   try {
     const logoEl = document.querySelector('.logo-wrap img');
     if (logoEl && logoEl.complete && logoEl.naturalWidth > 0) {
       const tmpC = document.createElement('canvas');
       tmpC.width = 80; tmpC.height = 80;
-      const tc = tmpC.getContext('2d');
-      tc.drawImage(logoEl, 0, 0, 80, 80);
-      doc.addImage(tmpC.toDataURL('image/png'), 'PNG', mg + 2, y + 2, 16, 16);
+      tmpC.getContext('2d').drawImage(logoEl, 0, 0, 80, 80);
+      doc.addImage(tmpC.toDataURL('image/png'), 'PNG', mg + 2, y + 3, 16, 16);
     }
-  } catch(e) {}
-
+  } catch(e){}
   doc.setTextColor(255,255,255);
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(15);
-  doc.text('SALIDA EQUIPO TI', W/2, y+13, { align:'center' });
-  doc.setFont('helvetica','normal');
-  doc.setFontSize(9);
-  const fStr = `${v('dia')}/${v('mes')}/${v('anio')}`;
-  doc.text(fStr, W - mg - 4, y + 13, { align:'right' });
-  y += 26;
+  doc.setFont('helvetica','bold'); doc.setFontSize(14);
+  doc.text('ENTREGA DE ACCESORIOS TI', W/2, y + 10, { align: 'center' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+  doc.text('DEPARTAMENTO DE SISTEMAS — REPRESENTACIONES LASTRA SAS', W/2, y + 16.5, { align: 'center' });
+  y += 28;
 
-  function section(title) {
-    doc.setFillColor(245,243,240);
-    doc.rect(mg, y, W-mg*2, 8, 'F');
-    doc.setDrawColor(226,224,218);
-    doc.rect(mg, y, W-mg*2, 8);
-    doc.setTextColor(92,90,86);
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(8);
-    doc.text(title, mg+5, y+5.5);
+  // Ciudad y fecha
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const fStr = `Santiago de Cali, ${v('dia')} de ${meses[parseInt(v('mes'))-1] || v('mes')} de ${v('anio')}`;
+  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  doc.text(fStr, mg, y);
+  y += 10;
+
+  // Destinatario
+  doc.setFontSize(10);
+  doc.text('Señor(a)', mg, y); y += 6;
+  doc.setFont('helvetica','bold');
+  doc.text(v('nombre'), mg, y); y += 5;
+  doc.setFont('helvetica','normal');
+  if (v('area')) { doc.setFontSize(9.5); doc.text(v('area'), mg, y); y += 5; }
+  if (v('sede')) { doc.text(v('sede'), mg, y); y += 5; }
+  y += 6;
+
+  // Cuerpo
+  const items = getItems();
+  const itemList = items.map(i => i.desc).join(', ');
+  doc.setFontSize(10);
+  const intro = `Por medio de la presente hago entrega del siguiente(s) artículo(s): ${itemList}.`;
+  const lines = doc.splitTextToSize(intro, W - mg*2);
+  doc.text(lines, mg, y);
+  y += lines.length * 6 + 6;
+
+  // TABLA ARTÍCULOS — ahora con 4 columnas
+  const totalW = W - mg*2;
+  const colW = [totalW * 0.30, totalW * 0.25, totalW * 0.25, totalW * 0.20];
+  const headers = ['DESCRIPCIÓN', 'MODELO / REFERENCIA', 'SERIAL', 'ESTADO'];
+  const rowH = 9;
+
+  // Header tabla
+  doc.setFillColor(245,243,240);
+  doc.rect(mg, y, totalW, rowH, 'F');
+  doc.setDrawColor(200,198,192);
+  doc.rect(mg, y, totalW, rowH);
+  doc.setTextColor(92,90,86); doc.setFont('helvetica','bold'); doc.setFontSize(7.5);
+  let cx = mg;
+  headers.forEach((h, i) => {
+    doc.text(h, cx + colW[i]/2, y + 6, { align: 'center' });
+    if (i < 3) { doc.setDrawColor(200,198,192); doc.line(cx + colW[i], y, cx + colW[i], y + rowH); }
+    cx += colW[i];
+  });
+  y += rowH;
+
+  // Filas
+  items.forEach((item, idx) => {
+    const bg = idx % 2 === 0 ? [255,255,255] : [250,249,247];
+    doc.setFillColor(...bg);
+    doc.rect(mg, y, totalW, rowH, 'F');
+    doc.setDrawColor(226,224,218); doc.rect(mg, y, totalW, rowH);
+    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+    cx = mg;
+    [item.desc, item.modelo, item.serial, item.estado].forEach((val, i) => {
+      const t = (val||'').length > 20 ? (val||'').slice(0,19)+'…' : (val||'');
+      doc.text(t, cx + colW[i]/2, y + 6.2, { align: 'center' });
+      if (i < 3) { doc.setDrawColor(226,224,218); doc.line(cx + colW[i], y, cx + colW[i], y + rowH); }
+      cx += colW[i];
+    });
+    y += rowH;
+  });
+  y += 8;
+
+  // OBSERVACIONES
+  const obs = v('obs').trim();
+  if (obs) {
+    doc.setFillColor(250,249,247); doc.rect(mg, y, totalW, 8, 'F');
+    doc.setDrawColor(226,224,218); doc.rect(mg, y, totalW, 8);
+    doc.setTextColor(92,90,86); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+    doc.text('OBSERVACIONES', mg+5, y+5.5);
     y += 8;
+    const obsLines = doc.splitTextToSize(obs, totalW-10);
+    const obsH = Math.max(18, obsLines.length * 5.5 + 8);
+    doc.setFillColor(255,255,255); doc.rect(mg, y, totalW, obsH, 'F');
+    doc.setDrawColor(226,224,218); doc.rect(mg, y, totalW, obsH);
+    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+    doc.text(obsLines.slice(0,6), mg+5, y+7);
+    y += obsH + 8;
   }
 
-  section('DESCRIPCIÓN DEL EQUIPO');
-  const cols = [
-    {lbl:'DESCRIPCIÓN', val:v('edesc'), w:30},
-    {lbl:'MARCA', val:v('emarca'), w:25},
-    {lbl:'MODELO', val:v('emodelo'), w:38},
-    {lbl:'SERIAL', val:v('eserial'), w:28},
-    {lbl:'RESPONSABLE', val:v('eresp'), w:33},
-    {lbl:'ÁREA', val:v('earea'), w:26},
-  ];
-  doc.setFillColor(250,249,247);
-  doc.rect(mg, y, W-mg*2, 7, 'F');
-  doc.setDrawColor(226,224,218);
-  doc.rect(mg, y, W-mg*2, 7);
-  doc.setTextColor(160,158,153); doc.setFont('helvetica','bold'); doc.setFontSize(7.5);
-  let cx = mg;
-  cols.forEach(c => { doc.text(c.lbl, cx+c.w/2, y+4.8, {align:'center'}); cx+=c.w; });
-  y += 7;
-  doc.setFillColor(255,255,255);
-  doc.rect(mg, y, W-mg*2, 11, 'F');
-  doc.rect(mg, y, W-mg*2, 11);
-  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  cx = mg;
-  cols.forEach(c => {
-    const t = c.val.length > 13 ? c.val.slice(0,12)+'…' : c.val;
-    doc.text(t, cx+c.w/2, y+7, {align:'center'});
-    cx += c.w;
-  });
-  y += 16;
+  // FIRMAS
+  doc.setFillColor(245,243,240);
+  doc.rect(mg, y, totalW, 8, 'F');
+  doc.setDrawColor(226,224,218); doc.rect(mg, y, totalW, 8);
+  doc.setTextColor(92,90,86); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('FIRMAS', mg+5, y+5.5);
+  y += 8;
 
-  section('OBSERVACIONES');
-  const obsH = 26;
-  doc.setFillColor(255,255,255);
-  doc.rect(mg, y, W-mg*2, obsH, 'F');
-  doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, obsH);
-  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
-  const lines = doc.splitTextToSize(v('obs'), W-mg*2-10);
-  doc.text(lines.slice(0,5), mg+5, y+8);
-  y += obsH + 8;
-
-  section('FIRMAS');
-  const sw = (W-mg*2)/3, sh = 44;
-  const roles = ['ENTREGADO POR','RECIBIDO POR','AUTORIZADO POR'];
-  const names = [v('n1'),v('n2'),v('n3')];
+  const sw = totalW/2, sh = 48;
+  const roles = ['ENTREGADO POR','RECIBIDO POR'];
+  const names = [v('n1'), v('n2')];
   roles.forEach((role, i) => {
     const sx = mg + i*sw;
-    doc.setFillColor(255,255,255);
-    doc.rect(sx, y, sw, sh, 'F');
+    doc.setFillColor(255,255,255); doc.rect(sx, y, sw, sh, 'F');
     doc.setDrawColor(226,224,218); doc.rect(sx, y, sw, sh);
-    doc.setFillColor(245,243,240);
-    doc.rect(sx, y, sw, 8, 'F');
+    doc.setFillColor(245,243,240); doc.rect(sx, y, sw, 8, 'F');
     doc.setTextColor(200,16,46); doc.setFont('helvetica','bold'); doc.setFontSize(7);
-    doc.text(role, sx+sw/2, y+5.5, {align:'center'});
+    doc.text(role, sx+sw/2, y+5.5, { align: 'center' });
     if (sigData[i+1]) {
-      try {
-        doc.addImage(sigData[i+1], 'PNG', sx+3, y+9, sw-6, 26);
-      } catch(e){}
+      try { doc.addImage(sigData[i+1], 'PNG', sx+4, y+9, sw-8, 28); } catch(e){}
     }
     doc.setDrawColor(200,16,46); doc.setLineWidth(.35);
-    doc.line(sx+5, y+sh-7, sx+sw-5, y+sh-7);
+    doc.line(sx+6, y+sh-7, sx+sw-6, y+sh-7);
     doc.setLineWidth(.2); doc.setDrawColor(226,224,218);
-    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-    doc.text(names[i], sx+sw/2, y+sh-3, {align:'center'});
+    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    doc.text(names[i], sx+sw/2, y+sh-3, { align: 'center' });
   });
   y += sh + 8;
 
+  // FOOTER
   doc.setTextColor(160,158,153); doc.setFontSize(7.5); doc.setFont('helvetica','normal');
-  doc.text('Lastra — Documento generado digitalmente', mg, 292);
-  doc.text(fStr, W-mg, 292, {align:'right'});
+  doc.text('Lastra — www.lastra.com.co', mg, 292);
+  doc.text(`${v('dia')}/${v('mes')}/${v('anio')}`, W-mg, 292, { align: 'right' });
 
   return doc;
 }
 
 function guardarPDF() {
-  const desc = v('edesc').trim();
+  const nombre = v('nombre').trim();
+  const items = getItems();
   const errmsg = document.getElementById('errmsg');
-  if (!desc || !signed[1] || !signed[2]) {
+  if (!nombre || items.length === 0 || !signed[1] || !signed[2]) {
     errmsg.style.display = 'block';
     setTimeout(() => errmsg.style.display = 'none', 4000);
     return;
@@ -482,8 +584,7 @@ function guardarPDF() {
   setTimeout(() => {
     try {
       const doc = buildPDF();
-      const dia = v('dia'), mes = v('mes'), anio = v('anio');
-      doc.save(`Salida_TI_${v('edesc')}_${dia}-${mes}-${anio}.pdf`);
+      doc.save(`Entrega_${nombre.replace(/\s+/g,'_')}_${v('dia')}-${v('mes')}-${v('anio')}.pdf`);
       toast('PDF guardado correctamente', true);
     } catch(e) {
       toast('Error al generar el PDF', false);
@@ -493,9 +594,7 @@ function guardarPDF() {
   }, 200);
 }
 
-// ESC para cerrar modal
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
 setToday();
 </script>
 </body>
