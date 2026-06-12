@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mantenimiento Preventivo — Lastra</title>
+<title>Salida Equipo TI — Lastra</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -162,7 +162,7 @@
   </div>
   <div class="header-pill">
     <div class="dot"></div>
-    <span>Mantenimiento Preventivo</span>
+    <span>Salida de Equipo</span>
   </div>
 </div>
 
@@ -170,7 +170,7 @@
 
   <div class="step-label">
     <div class="step-num">1</div>
-    <h2>Fecha del mantenimiento</h2>
+    <h2>Fecha de salida</h2>
   </div>
   <div class="card">
     <div class="fecha-row">
@@ -191,57 +191,39 @@
 
   <div class="step-label">
     <div class="step-num">2</div>
-    <h2>Información del usuario</h2>
+    <h2>Información del equipo</h2>
   </div>
   <div class="card">
-    <div class="info-grid">
-      <div class="info-cell">
-        <span class="info-label">Usuario</span>
-        <input class="info-in" id="usuario" type="text" placeholder="Nombre del usuario">
-      </div>
-      <div class="info-cell">
-        <span class="info-label">Departamento</span>
-        <input class="info-in" id="depto" type="text" placeholder="Nombre del departamento">
-      </div>
-    <div class="info-cell">
-        <span class="info-label">Tipo de Mantenimiento</span>
-
-        <select class="info-in" id="tipo">
-            <option value="">Seleccione una opción</option>
-            <option value="preventivo">Preventivo</option>
-            <option value="correctivo">Correctivo</option>
-        </select>
+    <div class="eq-head">
+      <div class="eq-th">Descripción</div>
+      <div class="eq-th">Marca</div>
+      <div class="eq-th">Modelo</div>
+      <div class="eq-th">Serial</div>
+      <div class="eq-th">Responsable</div>
+      <div class="eq-th">Área</div>
     </div>
+    <div class="eq-body">
+      <div class="eq-cell"><input class="eq-in" id="edesc" type="text" placeholder="Portátil"></div>
+      <div class="eq-cell"><input class="eq-in" id="emarca" type="text" placeholder="DELL"></div>
+      <div class="eq-cell"><input class="eq-in" id="emodelo" type="text" placeholder="Latitude 3490"></div>
+      <div class="eq-cell"><input class="eq-in mono" id="eserial" type="text" placeholder="H2KB1W2"></div>
+      <div class="eq-cell"><input class="eq-in" id="eresp" type="text" placeholder="usuario"></div>
+      <div class="eq-cell"><input class="eq-in" id="earea" type="text" placeholder="departamento"></div>
     </div>
   </div>
 
   <div class="step-label">
     <div class="step-num">3</div>
-    <h2>Funciones realizadas</h2>
-  </div>
-  <div class="card">
-    <div class="func-header">
-      <span class="func-header-label">Lista de actividades</span>
-      <button class="btn-add-func" onclick="addFunc()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Agregar actividad
-      </button>
-    </div>
-    <div class="func-list" id="funcList"></div>
-  </div>
-
-  <div class="step-label">
-    <div class="step-num">4</div>
     <h2>Observaciones</h2>
   </div>
   <div class="card">
     <div class="obs-body">
-      <textarea class="obs-ta" id="obs" rows="3" placeholder="Novedades, pendientes o comentarios adicionales del mantenimiento..."></textarea>
+      <textarea class="obs-ta" id="obs" rows="3" placeholder="El equipo sale de la compañía en perfecto estado. Adicional se presta Mouse Logitech RL2..."></textarea>
     </div>
   </div>
 
   <div class="step-label">
-    <div class="step-num">5</div>
+    <div class="step-num">4</div>
     <h2>Firmas digitales</h2>
   </div>
   <div class="card">
@@ -252,7 +234,7 @@
     <div class="sig-grid">
 
       <div class="sig-col">
-        <div class="sig-role">Realizado por</div>
+        <div class="sig-role">Entregado por</div>
         <input class="name-in" id="n1" type="text" placeholder="Nombre completo">
         <div class="sig-preview" id="prev1" onclick="openModal(1)">
           <img id="img1" src="" alt="Firma">
@@ -285,6 +267,23 @@
         <div class="sig-foot"><button class="btn-clr" onclick="clr(2)">✕ Borrar</button></div>
       </div>
 
+      <div class="sig-col">
+        <div class="sig-role">Autorizado por</div>
+        <input class="name-in" id="n3" type="text" placeholder="Nombre completo">
+        <div class="sig-preview" id="prev3" onclick="openModal(3)">
+          <img id="img3" src="" alt="Firma">
+          <div class="btn-open-sig">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            <span style="font-size:12px;color:var(--red);font-weight:600;letter-spacing:.1px">Firmar aquí</span>
+          </div>
+          <div class="edit-overlay">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Editar firma
+          </div>
+        </div>
+        <div class="sig-foot"><button class="btn-clr" onclick="clr(3)">✕ Borrar</button></div>
+      </div>
+
     </div>
   </div>
 
@@ -297,7 +296,7 @@
     Limpiar todo
   </button>
   <div class="spacer"></div>
-  <span class="errmsg" id="errmsg">Completa usuario, departamento y las dos firmas.</span>
+  <span class="errmsg" id="errmsg">Completa descripción y las firmas de entrega y recibido.</span>
   <button class="btn-send" id="btnSend" onclick="guardarPDF()">
     <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     Guardar PDF
@@ -309,13 +308,14 @@
   <div class="modal-box" id="modalBox">
     <div class="modal-header">
       <div class="modal-title">
-        <span class="role-tag" id="modalRoleTag">Realizado por</span>
+        <span class="role-tag" id="modalRoleTag">Entregado por</span>
         <h3>Dibuja tu firma</h3>
       </div>
       <button class="btn-modal-close" onclick="closeModal()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
+
     <div class="modal-canvas-area">
       <div class="modal-hint">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
@@ -329,6 +329,7 @@
         </div>
       </div>
     </div>
+
     <div class="modal-actions">
       <button class="btn-modal-clr" onclick="clearModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
@@ -348,70 +349,13 @@
 </div>
 
 <script>
-const signed = { 1: false, 2: false };
-const sigData = { 1: null, 2: null };
-const roleNames = { 1: 'Realizado por', 2: 'Recibido por' };
+const signed = { 1: false, 2: false, 3: false };
+const sigData = { 1: null, 2: null, 3: null };
+const roleNames = { 1: 'Entregado por', 2: 'Recibido por', 3: 'Autorizado por' };
 let currentSigNum = null;
 let modalHasDrawing = false;
-let funcCounter = 0;
 
-const defaultFuncs = [
-  'Limpieza física interna y externa del equipo',
-  'Revisión y limpieza de ventiladores y disipadores',
-  'Verificación del estado del disco duro / SSD',
-  'Actualización del sistema operativo y parches de seguridad',
-  'Actualización de controladores y drivers',
-  'Revisión y limpieza de programas innecesarios o malware',
-  'Verificación de rendimiento y temperatura del procesador',
-  'Revisión del estado de la batería (portátiles)',
-  'Verificación de conectividad de red',
-  'Revisión de copias de seguridad activas',
-];
-
-function addFunc(text, checked) {
-  funcCounter++;
-  const id = 'func_' + funcCounter;
-  const list = document.getElementById('funcList');
-  const div = document.createElement('div');
-  div.className = 'func-item';
-  div.id = 'fi_' + funcCounter;
-  div.innerHTML = `
-    <input type="checkbox" class="func-check" id="${id}" ${checked ? 'checked' : ''}>
-    <textarea class="func-in" rows="1" placeholder="Descripción de la actividad...">${text || ''}</textarea>
-    <button class="btn-del-func" onclick="delFunc('fi_${funcCounter}')" title="Eliminar">✕</button>
-  `;
-  list.appendChild(div);
-  const ta = div.querySelector('textarea');
-  ta.addEventListener('input', () => {
-    ta.style.height = 'auto';
-    ta.style.height = ta.scrollHeight + 'px';
-  });
-  if (text) {
-    setTimeout(() => {
-      ta.style.height = 'auto';
-      ta.style.height = ta.scrollHeight + 'px';
-    }, 0);
-  }
-}
-
-function delFunc(id) {
-  const el = document.getElementById(id);
-  if (el) el.remove();
-}
-
-function getFuncItems() {
-  const items = [];
-  document.querySelectorAll('.func-item').forEach(item => {
-    const chk = item.querySelector('.func-check');
-    const ta = item.querySelector('textarea');
-    if (ta && ta.value.trim()) {
-      items.push({ done: chk && chk.checked, text: ta.value.trim() });
-    }
-  });
-  return items;
-}
-
-// MODAL CANVAS
+// ── MODAL CANVAS ──
 const mCanvas = document.getElementById('modalCanvas');
 const mCtx = mCanvas.getContext('2d');
 mCtx.strokeStyle = '#1A1917';
@@ -446,6 +390,7 @@ function mStop() {
   modalHasDrawing = true;
   document.getElementById('btnConfirm').disabled = false;
 }
+
 mCanvas.addEventListener('mousedown', mStart);
 mCanvas.addEventListener('mousemove', mMove);
 mCanvas.addEventListener('mouseup', mStop);
@@ -457,6 +402,7 @@ mCanvas.addEventListener('touchend', mStop);
 function openModal(n) {
   currentSigNum = n;
   document.getElementById('modalRoleTag').textContent = roleNames[n];
+  // Si ya tiene firma, cargarla en el canvas
   clearModal();
   if (sigData[n]) {
     const img = new Image();
@@ -471,55 +417,59 @@ function openModal(n) {
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.body.style.overflow = '';
   currentSigNum = null;
 }
+
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
 }
+
 function clearModal() {
   mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
   document.getElementById('modalWrap').classList.remove('active', 'has-drawing');
   modalHasDrawing = false;
   document.getElementById('btnConfirm').disabled = true;
 }
+
 function confirmSig() {
   if (!currentSigNum || !modalHasDrawing) return;
   const dataUrl = mCanvas.toDataURL('image/png');
   sigData[currentSigNum] = dataUrl;
   signed[currentSigNum] = true;
+  // Actualizar preview
   const img = document.getElementById('img' + currentSigNum);
   img.src = dataUrl;
   document.getElementById('prev' + currentSigNum).classList.add('has-sig');
   closeModal();
   toast('Firma guardada', true);
 }
+
 function clr(n) {
-  sigData[n] = null; signed[n] = false;
+  sigData[n] = null;
+  signed[n] = false;
   document.getElementById('img' + n).src = '';
   document.getElementById('prev' + n).classList.remove('has-sig');
 }
+
 function resetAll() {
-  ['dia','mes','anio','usuario','depto','equipo','serial','obs','n1','n2']
+  ['dia','mes','anio','edesc','emarca','emodelo','eserial','eresp','earea','obs','n1','n2','n3']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  [1,2].forEach(clr);
-  document.getElementById('funcList').innerHTML = '';
-  funcCounter = 0;
-  loadDefaultFuncs();
+  [1,2,3].forEach(clr);
   setToday();
   document.getElementById('errmsg').style.display = 'none';
 }
+
 function setToday() {
   const d = new Date();
   document.getElementById('dia').value = d.getDate();
   document.getElementById('mes').value = d.getMonth() + 1;
   document.getElementById('anio').value = d.getFullYear();
 }
-function loadDefaultFuncs() {
-  defaultFuncs.forEach(f => addFunc(f, false));
-}
+
 function toast(msg, ok) {
   const t = document.getElementById('toast');
   const ic = document.getElementById('tIcon');
@@ -531,6 +481,7 @@ function toast(msg, ok) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3800);
 }
+
 function v(id) { return (document.getElementById(id) || {}).value || ''; }
 
 function buildPDF() {
@@ -539,145 +490,118 @@ function buildPDF() {
   const W = 210, mg = 15;
   let y = mg;
 
-  // Header
   doc.setFillColor(200, 16, 46);
-  doc.roundedRect(mg, y, W - mg*2, 22, 3, 3, 'F');
+  doc.roundedRect(mg, y, W - mg*2, 20, 3, 3, 'F');
+
   try {
     const logoEl = document.querySelector('.logo-wrap img');
     if (logoEl && logoEl.complete && logoEl.naturalWidth > 0) {
       const tmpC = document.createElement('canvas');
       tmpC.width = 80; tmpC.height = 80;
-      tmpC.getContext('2d').drawImage(logoEl, 0, 0, 80, 80);
-      doc.addImage(tmpC.toDataURL('image/png'), 'PNG', mg + 2, y + 3, 16, 16);
+      const tc = tmpC.getContext('2d');
+      tc.drawImage(logoEl, 0, 0, 80, 80);
+      doc.addImage(tmpC.toDataURL('image/png'), 'PNG', mg + 2, y + 2, 16, 16);
     }
   } catch(e) {}
+
   doc.setTextColor(255,255,255);
-  doc.setFont('helvetica','bold'); doc.setFontSize(14);
-  doc.text('MANTENIMIENTO PREVENTIVO Y CORRECTIVO', W/2, y + 10, { align:'center' });
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-  doc.text('DEPARTAMENTO DE SISTEMAS — REPRESENTACIONES LASTRA SAS', W/2, y + 16.5, { align:'center' });
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(15);
+  doc.text('SALIDA EQUIPO TI', W/2, y+13, { align:'center' });
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(9);
   const fStr = `${v('dia')}/${v('mes')}/${v('anio')}`;
-  doc.setFontSize(8); doc.text(fStr, W - mg - 3, y + 19, { align:'right' });
-  y += 28;
+  doc.text(fStr, W - mg - 4, y + 13, { align:'right' });
+  y += 26;
 
   function section(title) {
     doc.setFillColor(245,243,240);
     doc.rect(mg, y, W-mg*2, 8, 'F');
-    doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, 8);
-    doc.setTextColor(92,90,86); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+    doc.setDrawColor(226,224,218);
+    doc.rect(mg, y, W-mg*2, 8);
+    doc.setTextColor(92,90,86);
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(8);
     doc.text(title, mg+5, y+5.5);
     y += 8;
   }
 
-  // INFO USUARIO
-  section('INFORMACIÓN DEL USUARIO');
-  const infoFields = [
-    { lbl: 'USUARIO', val: v('usuario'), w: 50 },
-    { lbl: 'DEPARTAMENTO', val: v('depto'), w: 50 },
-    { lbl: 'TIPO DE MANTENIMIENTO', val: v('tipo'), w: 40 },
+  section('DESCRIPCIÓN DEL EQUIPO');
+  const cols = [
+    {lbl:'DESCRIPCIÓN', val:v('edesc'), w:30},
+    {lbl:'MARCA', val:v('emarca'), w:25},
+    {lbl:'MODELO', val:v('emodelo'), w:38},
+    {lbl:'SERIAL', val:v('eserial'), w:28},
+    {lbl:'RESPONSABLE', val:v('eresp'), w:33},
+    {lbl:'ÁREA', val:v('earea'), w:26},
   ];
-  const rowH = 10;
-  doc.setFillColor(250,249,247); doc.rect(mg, y, W-mg*2, rowH, 'F');
-  doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, rowH);
+  doc.setFillColor(250,249,247);
+  doc.rect(mg, y, W-mg*2, 7, 'F');
+  doc.setDrawColor(226,224,218);
+  doc.rect(mg, y, W-mg*2, 7);
   doc.setTextColor(160,158,153); doc.setFont('helvetica','bold'); doc.setFontSize(7.5);
   let cx = mg;
-  infoFields.forEach(f => {
-    doc.text(f.lbl, cx + 4, y + 4.5);
-    cx += f.w;
-  });
-  y += rowH;
-  doc.setFillColor(255,255,255); doc.rect(mg, y, W-mg*2, 12, 'F');
-  doc.rect(mg, y, W-mg*2, 12);
-  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(10);
+  cols.forEach(c => { doc.text(c.lbl, cx+c.w/2, y+4.8, {align:'center'}); cx+=c.w; });
+  y += 7;
+  doc.setFillColor(255,255,255);
+  doc.rect(mg, y, W-mg*2, 11, 'F');
+  doc.rect(mg, y, W-mg*2, 11);
+  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9);
   cx = mg;
-  infoFields.forEach(f => {
-    const t = f.val.length > 18 ? f.val.slice(0,17) + '…' : f.val;
-    doc.text(t, cx + 4, y + 8);
-    cx += f.w;
+  cols.forEach(c => {
+    const t = c.val.length > 13 ? c.val.slice(0,12)+'…' : c.val;
+    doc.text(t, cx+c.w/2, y+7, {align:'center'});
+    cx += c.w;
   });
-  y += 18;
+  y += 16;
 
-  // FUNCIONES REALIZADAS
-  section('FUNCIONES REALIZADAS');
-  const funcs = getFuncItems();
-  if (funcs.length === 0) {
-    doc.setFillColor(255,255,255); doc.rect(mg, y, W-mg*2, 10, 'F');
-    doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, 10);
-    doc.setTextColor(160,158,153); doc.setFont('helvetica','italic'); doc.setFontSize(9);
-    doc.text('Sin actividades registradas.', mg + 5, y + 6.5);
-    y += 10;
-  } else {
-    funcs.forEach((fn, i) => {
-      const rowH2 = 9;
-      const bg = i % 2 === 0 ? [255,255,255] : [250,249,247];
-      doc.setFillColor(...bg); doc.rect(mg, y, W-mg*2, rowH2, 'F');
-      doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, rowH2);
-      // checkbox
-      if (fn.done) {
-        doc.setFillColor(200,16,46); doc.roundedRect(mg + 4, y + 2, 5, 5, 1, 1, 'F');
-        doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(7);
-        doc.text('✓', mg + 5.2, y + 6);
-      } else {
-        doc.setFillColor(255,255,255); doc.roundedRect(mg + 4, y + 2, 5, 5, 1, 1, 'F');
-        doc.setDrawColor(180,178,170); doc.roundedRect(mg + 4, y + 2, 5, 5, 1, 1);
-      }
-      doc.setTextColor(fn.done ? 26 : 90, fn.done ? 25 : 88, fn.done ? 23 : 86);
-      doc.setFont('helvetica', fn.done ? 'bold' : 'normal'); doc.setFontSize(9);
-      const txt = fn.text.length > 90 ? fn.text.slice(0,89)+'…' : fn.text;
-      doc.text(txt, mg + 13, y + 6);
-      y += rowH2;
-    });
-  }
-  y += 6;
+  section('OBSERVACIONES');
+  const obsH = 26;
+  doc.setFillColor(255,255,255);
+  doc.rect(mg, y, W-mg*2, obsH, 'F');
+  doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, obsH);
+  doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+  const lines = doc.splitTextToSize(v('obs'), W-mg*2-10);
+  doc.text(lines.slice(0,5), mg+5, y+8);
+  y += obsH + 8;
 
-  // OBSERVACIONES
-  const obs = v('obs').trim();
-  if (obs) {
-    section('OBSERVACIONES');
-    const obsH = 24;
-    doc.setFillColor(255,255,255); doc.rect(mg, y, W-mg*2, obsH, 'F');
-    doc.setDrawColor(226,224,218); doc.rect(mg, y, W-mg*2, obsH);
-    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
-    const lines = doc.splitTextToSize(obs, W-mg*2-10);
-    doc.text(lines.slice(0,5), mg+5, y+8);
-    y += obsH + 6;
-  }
-
-  // FIRMAS
   section('FIRMAS');
-  const sw = (W-mg*2)/2, sh = 46;
-  const roles = ['REALIZADO POR','RECIBIDO POR'];
-  const names = [v('n1'), v('n2')];
+  const sw = (W-mg*2)/3, sh = 44;
+  const roles = ['ENTREGADO POR','RECIBIDO POR','AUTORIZADO POR'];
+  const names = [v('n1'),v('n2'),v('n3')];
   roles.forEach((role, i) => {
     const sx = mg + i*sw;
-    doc.setFillColor(255,255,255); doc.rect(sx, y, sw, sh, 'F');
+    doc.setFillColor(255,255,255);
+    doc.rect(sx, y, sw, sh, 'F');
     doc.setDrawColor(226,224,218); doc.rect(sx, y, sw, sh);
-    doc.setFillColor(245,243,240); doc.rect(sx, y, sw, 8, 'F');
+    doc.setFillColor(245,243,240);
+    doc.rect(sx, y, sw, 8, 'F');
     doc.setTextColor(200,16,46); doc.setFont('helvetica','bold'); doc.setFontSize(7);
-    doc.text(role, sx+sw/2, y+5.5, { align:'center' });
+    doc.text(role, sx+sw/2, y+5.5, {align:'center'});
     if (sigData[i+1]) {
-      try { doc.addImage(sigData[i+1], 'PNG', sx+4, y+9, sw-8, 28); } catch(e){}
+      try {
+        doc.addImage(sigData[i+1], 'PNG', sx+3, y+9, sw-6, 26);
+      } catch(e){}
     }
     doc.setDrawColor(200,16,46); doc.setLineWidth(.35);
-    doc.line(sx+6, y+sh-7, sx+sw-6, y+sh-7);
+    doc.line(sx+5, y+sh-7, sx+sw-5, y+sh-7);
     doc.setLineWidth(.2); doc.setDrawColor(226,224,218);
-    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-    doc.text(names[i], sx+sw/2, y+sh-3, { align:'center' });
+    doc.setTextColor(26,25,23); doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    doc.text(names[i], sx+sw/2, y+sh-3, {align:'center'});
   });
   y += sh + 8;
 
   doc.setTextColor(160,158,153); doc.setFontSize(7.5); doc.setFont('helvetica','normal');
   doc.text('Lastra — Documento generado digitalmente', mg, 292);
-  doc.text(fStr, W-mg, 292, { align:'right' });
+  doc.text(fStr, W-mg, 292, {align:'right'});
 
   return doc;
 }
 
 function guardarPDF() {
-  const usuario = v('usuario').trim();
-  const depto = v('depto').trim();
+  const desc = v('edesc').trim();
   const errmsg = document.getElementById('errmsg');
-  if (!usuario || !depto || !signed[1] || !signed[2]) {
+  if (!desc || !signed[1] || !signed[2]) {
     errmsg.style.display = 'block';
     setTimeout(() => errmsg.style.display = 'none', 4000);
     return;
@@ -690,7 +614,7 @@ function guardarPDF() {
     try {
       const doc = buildPDF();
       const dia = v('dia'), mes = v('mes'), anio = v('anio');
-      doc.save(`Mantenimiento_${usuario.replace(/\s+/g,'_')}_${dia}-${mes}-${anio}.pdf`);
+      doc.save(`Salida_TI_${v('edesc')}_${dia}-${mes}-${anio}.pdf`);
       toast('PDF guardado correctamente', true);
     } catch(e) {
       toast('Error al generar el PDF', false);
@@ -700,10 +624,10 @@ function guardarPDF() {
   }, 200);
 }
 
+// ESC para cerrar modal
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 setToday();
-loadDefaultFuncs();
 </script>
 </body>
 </html>
