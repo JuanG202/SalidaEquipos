@@ -11,6 +11,142 @@
 </head>
 <body>
 
+<!-- ===== LOCK SCREEN ===== -->
+<div id="lockOverlay" style="
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,#0d0d0d 0%,#1a0005 50%,#0d0d0d 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Outfit',sans-serif;
+">
+  <div style="text-align:center;margin-bottom:32px;">
+    <div style="
+      width:64px;height:64px;border-radius:50%;
+      background:rgba(200,16,46,0.15);border:2px solid rgba(200,16,46,0.4);
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 16px;font-size:28px;
+    ">🔒</div>
+    <h2 style="color:#fff;font-size:20px;font-weight:600;margin:0 0 6px;">Acceso restringido</h2>
+    <p style="color:rgba(255,255,255,0.45);font-size:13px;margin:0;">Ingresa el código para continuar</p>
+  </div>
+
+  <!-- PIN dots display -->
+  <div id="pinDots" style="display:flex;gap:12px;margin-bottom:28px;">
+    <div class="pdot"></div>
+    <div class="pdot"></div>
+    <div class="pdot"></div>
+    <div class="pdot"></div>
+  </div>
+
+  <!-- Error msg -->
+  <p id="pinError" style="color:#ff4d4d;font-size:13px;height:18px;margin:0 0 16px;opacity:0;transition:opacity .2s;">
+    Código incorrecto. Intenta de nuevo.
+  </p>
+
+  <!-- Numpad -->
+  <div style="display:grid;grid-template-columns:repeat(3,72px);gap:10px;">
+    <button class="pkey" onclick="pinPress('1')">1</button>
+    <button class="pkey" onclick="pinPress('2')">2</button>
+    <button class="pkey" onclick="pinPress('3')">3</button>
+    <button class="pkey" onclick="pinPress('4')">4</button>
+    <button class="pkey" onclick="pinPress('5')">5</button>
+    <button class="pkey" onclick="pinPress('6')">6</button>
+    <button class="pkey" onclick="pinPress('7')">7</button>
+    <button class="pkey" onclick="pinPress('8')">8</button>
+    <button class="pkey" onclick="pinPress('9')">9</button>
+    <button class="pkey pkey-clear" onclick="pinClear()" style="grid-column:1;">✕</button>
+    <button class="pkey" onclick="pinPress('0')">0</button>
+    <button class="pkey pkey-del" onclick="pinDel()">⌫</button>
+  </div>
+</div>
+
+<style>
+.pdot {
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid rgba(255,255,255,0.3);
+  background:transparent;transition:background .15s;
+}
+.pdot.filled { background:#C8102E;border-color:#C8102E; }
+.pkey {
+  width:72px;height:72px;border-radius:16px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);
+  color:#fff;font-size:22px;font-weight:500;cursor:pointer;
+  transition:background .15s,transform .1s;font-family:'Outfit',sans-serif;
+}
+.pkey:hover { background:rgba(255,255,255,0.13); }
+.pkey:active { transform:scale(.93); }
+.pkey-clear { background:rgba(200,16,46,0.15);border-color:rgba(200,16,46,0.3);color:#ff6680;font-size:18px; }
+.pkey-del { background:rgba(255,255,255,0.05);font-size:18px; }
+#lockOverlay.unlock-anim { animation:unlockFade .4s ease forwards; }
+@keyframes unlockFade { to { opacity:0;pointer-events:none; } }
+</style>
+
+<script>
+(function(){
+  const CODE = '2002';
+  let entered = '';
+
+  function updateDots(){
+    document.querySelectorAll('.pdot').forEach((d,i)=>{
+      d.classList.toggle('filled', i < entered.length);
+    });
+  }
+
+  function showError(){
+    const e = document.getElementById('pinError');
+    e.style.opacity='1';
+    setTimeout(()=>{ e.style.opacity='0'; },1800);
+  }
+
+  function shake(){
+    const dots = document.getElementById('pinDots');
+    dots.style.animation='none';
+    void dots.offsetWidth;
+    dots.style.animation='pinShake .35s ease';
+  }
+
+  const style = document.createElement('style');
+  style.textContent='@keyframes pinShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}';
+  document.head.appendChild(style);
+
+  window.pinPress = function(d){
+    if(entered.length >= 4) return;
+    entered += d;
+    updateDots();
+    if(entered.length === 4){
+      if(entered === CODE){
+        const ov = document.getElementById('lockOverlay');
+        ov.classList.add('unlock-anim');
+        setTimeout(()=>{ ov.style.display='none'; }, 400);
+      } else {
+        shake();
+        showError();
+        setTimeout(()=>{ entered=''; updateDots(); }, 600);
+      }
+    }
+  };
+
+  window.pinDel = function(){
+    entered = entered.slice(0,-1);
+    updateDots();
+  };
+
+  window.pinClear = function(){
+    entered='';
+    updateDots();
+    document.getElementById('pinError').style.opacity='0';
+  };
+
+  document.addEventListener('keydown',function(e){
+    if(document.getElementById('lockOverlay').style.display==='none') return;
+    if(e.key>='0'&&e.key<='9') pinPress(e.key);
+    else if(e.key==='Backspace') pinDel();
+    else if(e.key==='Escape') pinClear();
+  });
+})();
+</script>
+<!-- ===== / LOCK SCREEN ===== -->
+
+
 <div class="topbar">
   <div class="brand">
     <div class="logo-wrap">
